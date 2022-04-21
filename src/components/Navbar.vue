@@ -1,5 +1,5 @@
 <template>
-  <b-navbar type="dark" variant="dark">
+  <b-navbar type="light" variant="light">
     <b-navbar-nav>
       <b-nav-item><b-link :to="{ name: 'home' }">Home</b-link></b-nav-item>
     </b-navbar-nav>
@@ -25,7 +25,7 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
+/* a {
   color: #42b983;
-}
+} */
 </style>

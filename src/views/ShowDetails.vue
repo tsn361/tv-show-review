@@ -1,5 +1,5 @@
 <template>
-  <div class="ShowDetailsView">
+  <div class="ShowDetailsView" >
     <div class="container mt-4 text-center" style="margin: 0 auto" v-if="!isLoading">
       <div class="row">
         <b-col cols="12" lg="8">
@@ -68,16 +68,9 @@ export default {
       isLoading: true as boolean
     }
   },
-  methods: {
-    async getShowDetails(showId: string){
-     this.showDetails = await API.getShowDetails(showId);
-     this.isLoading = false;
-    }
-
-  },
-  mounted() {
-
-    this.getShowDetails(this.$route.params.id)
+ async mounted() {
+    this.showDetails = await API.getShowDetails(this.$route.params.id);
+    this.isLoading = false;
   },
 };
 </script>
@@ -85,7 +78,7 @@ export default {
 <style scoped>
 .card {
   background: #222;
-  border: 1px solid #dd2476;
+  /* border: 1px solid #dd2476; */
   color: rgba(250, 250, 250, 0.8);
   margin-bottom: 2rem;
   cursor: pointer;
@@ -94,5 +87,8 @@ export default {
 .card img {
   background-size: cover;
   max-height: 300px;
+}
+.ShowDetailsView{
+  min-height: 600px;
 }
 </style>

@@ -14,9 +14,14 @@ export default class APIService {
     APIService._instance = this;
   }
 
-
-  public async getShowDetails(showId: string) : Promise<any> {
-      const response = await axios.get(`/shows/${showId}?embed=cast`);
-      return response.data;
+  public async getShowDetails(showId: string): Promise<any> {
+    const response = await axios.get(`/shows/${showId}?embed=cast`);
+    return response.data;
   }
+
+  public async getShows(): Promise<any> {
+    const response = await axios.get(`/shows`);
+    return response.data;
+  }
+
 }
