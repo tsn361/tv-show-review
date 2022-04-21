@@ -4,7 +4,7 @@
             <b-col cols="12" class="text-start text-white mt-4" style="background: #212529">
                 <h1 class="mb-0 py-3">{{genre}}</h1>
             </b-col>
-            <b-col cols="6" lg="3" class="mt-4" v-for="val in movies.slice(0, 8)" :key="val.id">
+            <b-col cols="12" lg="3" class="mt-4" v-for="val in movies.slice(0, 8)" :key="val.id">
                 <b-link :to="{ name: 'show', params: { id: val.id } }">
                     <div class="card">
                         <img :src="val.image.medium" class="card-img-top" alt="..." />

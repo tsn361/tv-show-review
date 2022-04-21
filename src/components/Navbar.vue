@@ -3,6 +3,18 @@
     <b-navbar-nav>
       <b-nav-item><b-link :to="{ name: 'home' }">Home</b-link></b-nav-item>
     </b-navbar-nav>
+    <form class="input-group w-auto my-auto d-none d-sm-flex">
+        <input
+          autocomplete="off"
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          style="min-width: 550px;"
+        />
+        <span class="input-group-text border-0 d-none d-lg-flex">
+          <font-awesome-icon icon="fas fa-search" />
+        </span>
+      </form>
   </b-navbar>
 </template>
 
