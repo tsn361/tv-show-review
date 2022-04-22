@@ -1,6 +1,6 @@
 <template>
   <div class="ShowDetailsView">
-    <div class="container mt-4 text-center" style="margin: 0 auto" v-if="!isLoading">
+    <div class="container mt-4 text-center m-auto" v-if="!isLoading">
       <div class="row">
         <b-col cols="12" lg="8">
           <b-card no-body class="overflow-hidden mainCard">
@@ -43,8 +43,8 @@
         </b-col>
       </div>
       <div class="row">
-        <b-col cols="12" class="text-start text-white my-4" style="background: #212529">
-          <h3 class="mb-0 py-3">Casts</h3>
+        <b-col cols="12" class="text-start text-white mb-4" style="">
+          <h3 class="mb-0 p-3 header-bg">Casts</h3>
         </b-col>
         <b-col cols="12">
           <b-row>
@@ -88,7 +88,7 @@ export default {
     this.showDetails = await API.getShowDetails(this.$route.params.id);
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000);
+    }, 1000);
   },
 };
 </script>
@@ -112,5 +112,8 @@ export default {
 }
 .ShowDetailsView {
   min-height: 600px;
+}
+.header-bg{
+  background: #212529
 }
 </style>

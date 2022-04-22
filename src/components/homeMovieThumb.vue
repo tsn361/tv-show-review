@@ -1,8 +1,8 @@
 <template>
   <div class="container text-center" style="margin: 0 auto">
     <div class="row" v-if="movies.length > 0">
-      <b-col cols="12" class="text-start text-white mt-4" style="background: #212529">
-        <h3 class="mb-0 py-3">{{ genre }}</h3>
+      <b-col cols="12" class="text-start text-white">
+        <h3 class="mb-0 p-3 header-bg">{{ genre }}</h3>
       </b-col>
       <b-col cols="6" lg="3" class="mt-4" v-for="val in movies.slice(0, 8)" :key="val.id">
         <b-link :to="{ name: 'show', params: { id: val.id } }">
@@ -47,6 +47,10 @@ export default {
 };
 </script>
 <style scoped>
+.header-bg{
+  background: #212529
+}
+
 @media (max-width: 767px) {
   .card-title {
     font-size: 16px;

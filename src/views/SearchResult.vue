@@ -5,7 +5,7 @@
     </div>
     <div class="container mt-4 text-center" style="margin: 0 auto" v-else>
       <div class="row" v-if="searchResults.length > 0">
-        <div class="col-12 text-start mt-5">
+        <div class="col-12 text-start ">
           <h3 class="text-white">Search Results for "{{searchKey}}"</h3>
         </div>
         <b-col cols="6" lg="3" class="mt-4" v-for="val in searchResults" :key="val.id">

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home mt-4">
     <home-movie-thumb :movies="filteredActionShows" genre="Action"></home-movie-thumb>
     <home-movie-thumb :movies="filteredThrillerShows" genre="Thriller" class="mt-4"></home-movie-thumb>
     <home-movie-thumb :movies="filteredHorrorShows" genre="Horror" class="mt-4"></home-movie-thumb>
