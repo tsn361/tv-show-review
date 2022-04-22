@@ -1,12 +1,17 @@
 <template>
-  <div class="ShowDetailsView" >
+  <div class="ShowDetailsView">
     <div class="container mt-4 text-center" style="margin: 0 auto" v-if="!isLoading">
       <div class="row">
         <b-col cols="12" lg="8">
-          <b-card no-body class="overflow-hidden">
+          <b-card no-body class="overflow-hidden mainCard">
             <b-row no-gutters class="text-start">
               <b-col md="4">
-                <b-card-img :src="showDetails.image.original" alt="Image" class="rounded-0"></b-card-img>
+                <b-card-img
+                  v-if="showDetails.image"
+                  :src="showDetails.image.original"
+                  alt="Image"
+                  class="rounded-0"
+                ></b-card-img>
               </b-col>
               <b-col md="8">
                 <b-card-body :title="showDetails.name">
@@ -17,9 +22,11 @@
           </b-card>
         </b-col>
         <b-col cols="12" lg="4">
-          <b-card title="Show Info">
+          <b-card class="mainCard" title="Show Info">
             <ul class="list-unstyled text-start">
-              <li><b>Network:</b> {{ showDetails.network.country.name }}, {{ showDetails.network.name }}</li>
+              <li v-if="showDetails.network">
+                <b>Network:</b> {{ showDetails.network.country.name }}, {{ showDetails.network.name }}
+              </li>
               <li>
                 <b>Schedule:</b> {{ showDetails.schedule.days[0] }} At {{ showDetails.schedule.time }} ({{
                   showDetails.averageRuntime
@@ -28,7 +35,7 @@
               <li><b>Status:</b> {{ showDetails.status }}</li>
               <li><b>Show Type:</b> {{ showDetails.type }}</li>
               <li><b>Genres:</b> {{ showDetails.genres.join("| ") }}</li>
-              <li>
+              <li v-if="showDetails.network">
                 <b>Official site:</b> <a :href="showDetails.officialSite"></a>{{ showDetails.network.officialSite }}
               </li>
             </ul>
@@ -36,6 +43,9 @@
         </b-col>
       </div>
       <div class="row">
+        <b-col cols="12" class="text-start text-white my-4" style="background: #212529">
+          <h3 class="mb-0 py-3">Casts</h3>
+        </b-col>
         <b-col cols="12">
           <b-row>
             <b-col cols="6" lg="3" v-for="(val, i) in showDetails._embedded.cast" :key="i">
@@ -50,10 +60,14 @@
         </b-col>
       </div>
     </div>
+    <div class="container mt-4 text-center" style="margin: 0 auto" v-else>
+      <loader which-page="grid"></loader>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import Loader from "@/components/Loader.vue";
 // @ is an alias to /src
 import Show from "@/types/Show";
 import APIService from "@/services/APIService";
@@ -61,16 +75,20 @@ const API = APIService.getInstance();
 
 export default {
   name: "ShowDetailsView",
-  components: {},
+  components: {
+    Loader,
+  },
   data() {
     return {
       showDetails: {} as Show,
-      isLoading: true as boolean
-    }
+      isLoading: true as boolean,
+    };
   },
- async mounted() {
+  async mounted() {
     this.showDetails = await API.getShowDetails(this.$route.params.id);
-    this.isLoading = false;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
   },
 };
 </script>
@@ -83,12 +101,16 @@ export default {
   margin-bottom: 2rem;
   cursor: pointer;
 }
-
+.mainCard {
+  max-height: 300px;
+  height: 300px;
+  min-height: 228px;
+}
 .card img {
   background-size: cover;
   max-height: 300px;
 }
-.ShowDetailsView{
+.ShowDetailsView {
   min-height: 600px;
 }
 </style>

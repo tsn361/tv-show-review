@@ -4,23 +4,39 @@
       <b-nav-item><b-link :to="{ name: 'home' }">Home</b-link></b-nav-item>
     </b-navbar-nav>
     <form class="input-group w-auto my-auto d-none d-sm-flex">
-        <input
-          autocomplete="off"
-          type="search"
-          class="form-control rounded"
-          placeholder="Search"
-          style="min-width: 550px;"
-        />
-        <span class="input-group-text border-0 d-none d-lg-flex">
-          <font-awesome-icon icon="fas fa-search" />
-        </span>
-      </form>
+      <input
+        autocomplete="off"
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        style="min-width: 550px"
+        v-model="searchQuery"
+      />
+      <span class="searchBtn input-group-text border-0 d-none d-lg-flex" @click="searchShows()">
+        <font-awesome-icon icon="fas fa-search" />
+      </span>
+    </form>
   </b-navbar>
 </template>
 
 <script lang="ts">
 export default {
   name: "NavbarView",
+  data() {
+    return {
+      searchQuery: "" as string,
+    };
+  },
+  methods: {
+    searchShows() {
+      this.$router.push({
+        name: "search",
+        query: {
+          q: this.searchQuery,
+        },
+      });
+    },
+  },
 };
 </script>
 
@@ -40,4 +56,7 @@ li {
 /* a {
   color: #42b983;
 } */
+.searchBtn {
+  cursor: pointer;
+}
 </style>

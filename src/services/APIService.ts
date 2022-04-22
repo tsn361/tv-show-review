@@ -24,4 +24,9 @@ export default class APIService {
     return response.data;
   }
 
+  public async getSearchResult(query?: string | any): Promise<any> {
+    console.log(query);
+    const response = await axios.get(`/search/shows?q=${query}`);
+    return response.data;
+  }
 }
