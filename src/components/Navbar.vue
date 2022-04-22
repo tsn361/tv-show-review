@@ -1,23 +1,26 @@
 <template>
   <div class="">
-    <b-navbar type="light" variant="light">
-      <div class="container">
+    <b-navbar type="light" variant="light" class="px-0">
+      <div class="container px-0 d-flex">
         <b-navbar-nav>
           <b-nav-item><b-link :to="{ name: 'home' }">Home</b-link></b-nav-item>
         </b-navbar-nav>
-        <form class="input-group w-auto my-auto d-none d-sm-flex" @submit.prevent="searchShows()">
-          <input
-            autocomplete="off"
-            type="search"
-            class="form-control rounded"
-            placeholder="Search"
-            style="min-width: 550px"
-            v-model="searchQuery"
-          />
-          <span class="searchBtn input-group-text border-0 d-none d-lg-flex" @click="searchShows()">
-            <font-awesome-icon icon="fas fa-search" />
-          </span>
-        </form>
+        <b-navbar-nav>
+          <b-nav-item>
+            <form class="input-group w-auto my-auto d-flex" @submit.prevent="searchShows()">
+              <input
+                autocomplete="off"
+                type="search"
+                class="form-control rounded"
+                placeholder="Search"
+                v-model="searchQuery"
+              />
+              <span class="searchBtn input-group-text border-0 d-flex" @click="searchShows()">
+                <font-awesome-icon icon="fas fa-search" />
+              </span>
+            </form>
+          </b-nav-item>
+        </b-navbar-nav>
       </div>
     </b-navbar>
 
@@ -80,5 +83,8 @@ li {
 } */
 .searchBtn {
   cursor: pointer;
+}
+.search-box{
+
 }
 </style>

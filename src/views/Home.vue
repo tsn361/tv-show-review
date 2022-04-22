@@ -39,8 +39,6 @@ export default {
       return show.genres.includes("Action") && show.rating.average >= 6.5 && show.rating.average <= 9.5;
     });
 
-    //console.log("shows=> ", shows);
-
   },
 };
 </script>
