@@ -5,6 +5,9 @@
     </div>
     <div class="container mt-4 text-center" style="margin: 0 auto" v-else>
       <div class="row" v-if="searchResults.length > 0">
+        <div class="col-12 text-start mt-5">
+          <h3 class="text-white">Search Results for "{{searchKey}}"</h3>
+        </div>
         <b-col cols="6" lg="3" class="mt-4" v-for="val in searchResults" :key="val.id">
           <b-link :to="{ name: 'show', params: { id: val.id } }">
             <div class="card">
@@ -24,7 +27,9 @@
           </b-link>
         </b-col>
       </div>
-      <div v-else class="row">No results found</div>
+      <div v-else class="text-center mt-5">
+        <h3 class="text-white">No results found</h3>
+      </div>
     </div>
   </div>
 </template>
@@ -40,6 +45,7 @@ export default {
     return {
       searchResults: [] as any[],
       isLoading: true as boolean,
+      searchKey: "" as string,
     };
   },
   components: {
@@ -52,6 +58,8 @@ export default {
     async search(query?: string | any) {
       const searchResults = await API.getSearchResult(query);
       let newResults = [] as any[];
+      //console.log("searchResults ", searchResults)
+
       searchResults.forEach((result: any) => {
         if (result.show.image) {
           newResults.push(result.show);
@@ -61,11 +69,11 @@ export default {
     },
   },
   async mounted() {
+
+    this.searchKey = this.$route.query.q;
     this.isLoading = true;
     await this.search(this.$route.query.q);
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+    this.isLoading = false;
   },
   watch: {
     // watch route params change
@@ -73,9 +81,7 @@ export default {
       if (to.query.q !== from.query.q) {
         this.isLoading = true;
         await this.search(this.$route.query.q);
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 2000);
+        this.isLoading = false;
       }
     },
   },

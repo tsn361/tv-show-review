@@ -1,25 +1,30 @@
 <template>
-  <b-navbar type="light" variant="light">
-    <b-navbar-nav>
-      <b-nav-item><b-link :to="{ name: 'home' }">Home</b-link></b-nav-item>
-    </b-navbar-nav>
-    <form class="input-group w-auto my-auto d-none d-sm-flex">
-      <input
-        autocomplete="off"
-        type="search"
-        class="form-control rounded"
-        placeholder="Search"
-        style="min-width: 550px"
-        v-model="searchQuery"
-      />
-      <span class="searchBtn input-group-text border-0 d-none d-lg-flex" @click="searchShows()">
-        <font-awesome-icon icon="fas fa-search" />
-      </span>
-    </form>
-  </b-navbar>
+  <div>
+    <b-navbar type="light" variant="light">
+      <b-navbar-nav>
+        <b-nav-item><b-link :to="{ name: 'home' }">Home</b-link></b-nav-item>
+      </b-navbar-nav>
+      <form class="input-group w-auto my-auto d-none d-sm-flex" @submit.prevent="searchShows()">
+        <input
+          autocomplete="off"
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          style="min-width: 550px"
+          v-model="searchQuery"
+        />
+        <span class="searchBtn input-group-text border-0 d-none d-lg-flex" @click="searchShows()">
+          <font-awesome-icon icon="fas fa-search" />
+        </span>
+      </form>
+    </b-navbar>
+
+  </div>
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
+
 export default {
   name: "NavbarView",
   data() {
@@ -29,6 +34,12 @@ export default {
   },
   methods: {
     searchShows() {
+
+      if(this.searchQuery.trim() === "") {
+        this.showToast();
+        return;
+      }
+
       this.$router.push({
         name: "search",
         query: {
@@ -36,6 +47,15 @@ export default {
         },
       });
     },
+    showToast() {
+      let instance = Vue.$toast.open(
+          {
+            message: 'Please type something to search!',
+            type: 'info',
+            position: 'top-right',
+          }
+        );
+    }
   },
 };
 </script>

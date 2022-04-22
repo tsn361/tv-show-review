@@ -11,6 +11,10 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+import VueToast from 'vue-toast-notification';
+//import 'vue-toast-notification/dist/theme-default.css';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -29,6 +33,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios)
+Vue.use(VueToast);
+
 Vue.config.productionTip = false
 
 new Vue({
