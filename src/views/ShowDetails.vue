@@ -41,10 +41,8 @@ export default Vue.extend({
 <style scoped>
 .card {
   background: #222;
-  /* border: 1px solid #dd2476; */
   color: rgba(250, 250, 250, 0.8);
   margin-bottom: 2rem;
-  cursor: pointer;
 }
 .mainCard {
   max-height: 300px;

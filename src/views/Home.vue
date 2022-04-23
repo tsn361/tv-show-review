@@ -48,7 +48,6 @@ export default Vue.extend({
   border: 1px solid #dd2476;
   color: rgba(250, 250, 250, 0.8);
   margin-bottom: 2rem;
-  cursor: pointer;
 }
 
 .card img {
