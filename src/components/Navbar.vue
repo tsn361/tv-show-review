@@ -3,7 +3,9 @@
     <b-navbar type="light" variant="light" class="px-0">
       <div class="container px-0 d-flex">
         <b-navbar-nav>
-          <span v-if="getCurrentRoute == 'home'" class="home-nav">TVmaze Shows</span>
+          <span v-if="getCurrentRoute == 'home'" class="home-nav">
+            <img src="@/assets/thumb_image.png" alt="logo" class="logo" />
+          </span>
           <b-nav-item v-else>
             <b-link  :to="{ name: 'home' }">Home</b-link>
           </b-nav-item>
@@ -32,6 +34,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+//import logo from '@/assets/logo.png';
 
 export default Vue.extend({
   name: "NavbarView",
@@ -64,7 +67,7 @@ export default Vue.extend({
     typeSearchKey(){
       console.log("searchQuery=> ",this.searchQuery.trim(), this.searchQuery.length);
       if (this.searchQuery.trim() === "") {
-        console.log("redirect to home");
+        //console.log("redirect to home");
         this.$router.push({
           name: "home",
         });
@@ -100,6 +103,7 @@ li {
 .searchBtn {
   cursor: pointer;
 }
-.search-box {
+.logo {
+  height: 42px;
 }
 </style>

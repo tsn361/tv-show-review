@@ -25,8 +25,8 @@ describe('Navbar.vue', () => {
     })
 
     const searcInput = wrapper.find('input');
-    const homeNav = wrapper.find('.home-nav');
+    const homeNav = wrapper.find('img');
     expect(searcInput.attributes('placeholder')).toBe('Search')
-    expect(homeNav.text()).toMatch('TVmaze Shows');
+    expect(homeNav.exists()).toBe(true);
   })
 })
