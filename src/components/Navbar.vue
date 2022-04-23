@@ -23,15 +23,13 @@
         </b-navbar-nav>
       </div>
     </b-navbar>
-
   </div>
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 
-import Vue from 'vue'
-
-export default {
+export default Vue.extend({
   name: "NavbarView",
   data() {
     return {
@@ -40,8 +38,7 @@ export default {
   },
   methods: {
     searchShows() {
-
-      if(this.searchQuery.trim() === "") {
+      if (this.searchQuery.trim() === "") {
         this.showToast();
         return;
       }
@@ -54,16 +51,14 @@ export default {
       });
     },
     showToast() {
-      let instance = Vue.$toast.open(
-          {
-            message: 'Please type something to search!',
-            type: 'info',
-            position: 'top-right',
-          }
-        );
-    }
+      let instance = Vue.$toast.open({
+        message: "Please type something to search!",
+        type: "info",
+        position: "top-right",
+      });
+    },
   },
-};
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -85,7 +80,6 @@ li {
 .searchBtn {
   cursor: pointer;
 }
-.search-box{
-
+.search-box {
 }
 </style>

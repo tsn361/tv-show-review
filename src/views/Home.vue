@@ -7,14 +7,15 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 // @ is an alias to /src
 import APIService from "@/services/APIService";
-import HomeShowThumb from '@/components/HomeShowThumb.vue';
+import HomeShowThumb from "@/components/HomeShowThumb.vue";
 const API = APIService.getInstance();
 
-export default {
+export default Vue.extend({
   name: "HomeView",
-  components: {HomeShowThumb},
+  components: { HomeShowThumb },
   data() {
     return {
       filteredHorrorShows: [] as any,
@@ -23,7 +24,6 @@ export default {
     };
   },
   async mounted() {
-
     let shows = await API.getShows();
     shows = shows.slice(0, 40);
 
@@ -38,9 +38,8 @@ export default {
     this.filteredActionShows = shows.filter((show: any) => {
       return show.genres.includes("Action") && show.rating.average >= 6.5 && show.rating.average <= 9.5;
     });
-
   },
-};
+});
 </script>
 
 <style scoped>
@@ -56,7 +55,7 @@ export default {
   background-size: cover;
   max-height: 300px;
 }
-.home{
+.home {
   min-height: 600px;
 }
 </style>

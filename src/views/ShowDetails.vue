@@ -1,7 +1,7 @@
 <template>
   <div class="ShowDetailsView">
     <div class="container mt-4 text-center m-auto" v-if="!isLoading">
-     <ShowDetails :show-details="showDetails"></ShowDetails>
+      <ShowDetails :show-details="showDetails"></ShowDetails>
     </div>
     <div class="container mt-4 text-center" style="margin: 0 auto" v-else>
       <loader which-page="grid"></loader>
@@ -16,13 +16,13 @@ import Show from "@/types/Show";
 import APIService from "@/services/APIService";
 import ShowDetails from "@/components/ShowDetails.vue";
 const API = APIService.getInstance();
-
-export default {
+import Vue from "vue";
+export default Vue.extend({
   name: "ShowDetailsView",
   components: {
     Loader,
-    ShowDetails
-},
+    ShowDetails,
+  },
   data() {
     return {
       showDetails: {} as Show,
@@ -35,7 +35,7 @@ export default {
       this.isLoading = false;
     }, 1000);
   },
-};
+});
 </script>
 
 <style scoped>
@@ -58,7 +58,7 @@ export default {
 .ShowDetailsView {
   min-height: 600px;
 }
-.header-bg{
-  background: #212529
+.header-bg {
+  background: #212529;
 }
 </style>

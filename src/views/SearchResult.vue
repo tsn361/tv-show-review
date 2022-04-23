@@ -5,8 +5,8 @@
     </div>
     <div class="container mt-4 text-center" style="margin: 0 auto" v-else>
       <div class="row" v-if="searchResults.length > 0">
-        <div class="col-12 text-start ">
-          <h3 class="text-white">Search Results for "{{searchKey}}"</h3>
+        <div class="col-12 text-start">
+          <h3 class="text-white">Search Results for "{{ searchKey }}"</h3>
         </div>
         <b-col cols="6" lg="3" class="mt-4" v-for="val in searchResults" :key="val.id">
           <SearchShowThumb :show="val"></SearchShowThumb>
@@ -20,27 +20,27 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import Loader from "@/components/Loader.vue";
 import SearchShowThumb from "@/components/SearchShowThum.vue";
 
 import APIService from "@/services/APIService";
 const API = APIService.getInstance();
 
-export default {
+export default Vue.extend({
   name: "SearchResult",
   data() {
     return {
       searchResults: [] as any[],
       isLoading: true as boolean,
-      searchKey: "" as string,
+      searchKey: "" as any,
     };
   },
   components: {
     Loader,
-    SearchShowThumb
+    SearchShowThumb,
   },
   methods: {
-
     async search(query?: string | any) {
       const searchResults = await API.getSearchResult(query);
       let newResults = [] as any[];
@@ -55,7 +55,6 @@ export default {
     },
   },
   async mounted() {
-
     this.searchKey = this.$route.query.q;
     this.isLoading = true;
     await this.search(this.$route.query.q);
@@ -71,7 +70,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style scoped>
