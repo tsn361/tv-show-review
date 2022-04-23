@@ -1,5 +1,6 @@
-import { shallowMount, mount } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import HomeShowThumb from '@/components/HomeShowThumb.vue'
+import { BootstrapVue } from 'bootstrap-vue'
 
 describe('HomeShowThumb.vue', () => {
   it('renders HomeShowThumb thumb', () => {
@@ -62,9 +63,12 @@ describe('HomeShowThumb.vue', () => {
           }
         }
       }
+
+    const localVue = createLocalVue()
+    localVue.use(BootstrapVue)
     const genre = "Action"
 
-    const wrapper = shallowMount(HomeShowThumb, {propsData: { movies: [aShow], genre: genre}  })
+    const wrapper = mount(HomeShowThumb, {propsData: { movies: [aShow], genre: genre}, localVue  })
 
     const genreTitle = wrapper.find('h3');
     const cardTitle = wrapper.find('h5');

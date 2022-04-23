@@ -1,5 +1,6 @@
-import { shallowMount, mount } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import ShowDetails from '@/components/ShowDetails.vue'
+import { BootstrapVue } from 'bootstrap-vue'
 
 describe('SearchShowThum.vue', () => {
   it('renders SearchShowThum thumb', () => {
@@ -486,7 +487,10 @@ describe('SearchShowThum.vue', () => {
         }
     }
 
-    const wrapper = shallowMount(ShowDetails, {propsData: { showDetails: aShow } })
+    const localVue = createLocalVue()
+    localVue.use(BootstrapVue)
+
+    const wrapper = mount(ShowDetails, { propsData: { showDetails: aShow }, localVue })
     const showSummery = wrapper.find('p');
     const castTitle = wrapper.findAll('h5');
 

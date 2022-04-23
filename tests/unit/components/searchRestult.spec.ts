@@ -1,5 +1,6 @@
-import { shallowMount, mount } from '@vue/test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import SearchShowThum from '@/components/SearchShowThum.vue'
+import { BootstrapVue } from 'bootstrap-vue'
 
 describe('SearchShowThum.vue', () => {
   it('renders SearchShowThum thumb', () => {
@@ -61,7 +62,10 @@ describe('SearchShowThum.vue', () => {
         }
     }
 
-    const wrapper = shallowMount(SearchShowThum, {propsData: { show: aShow } })
+    const localVue = createLocalVue()
+    localVue.use(BootstrapVue)
+
+    const wrapper = mount(SearchShowThum, {propsData: { show: aShow }, localVue})
     const cardTitle = wrapper.find('h5');
     expect(cardTitle.text()).toMatch(aShow.name);
 
