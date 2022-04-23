@@ -1,12 +1,21 @@
-import { shallowMount, mount } from '@vue/test-utils'
+
+import { mount } from '@vue/test-utils'
 import Navbar from '@/components/Navbar.vue'
 
 describe('Navbar.vue', () => {
   it('renders passed', () => {
-    const wrapper = mount(Navbar)
+  
+    const $route = {path: '/', name: 'home'}
+
+    const wrapper = mount(Navbar, {
+      mocks: {
+        $route
+      }
+    })
+
     const searcInput = wrapper.find('input');
-    
+    const homeNav = wrapper.find('.home-nav');
     expect(searcInput.attributes('placeholder')).toBe('Search')
-    expect(wrapper.text()).toMatch('Home');
+    expect(homeNav.text()).toMatch('TVmaze Shows');
   })
 })

@@ -3,17 +3,21 @@
     <b-navbar type="light" variant="light" class="px-0">
       <div class="container px-0 d-flex">
         <b-navbar-nav>
-          <b-nav-item><b-link :to="{ name: 'home' }">Home</b-link></b-nav-item>
+          <span v-if="getCurrentRoute == 'home'" class="home-nav">TVmaze Shows</span>
+          <b-nav-item v-else>
+            <b-link  :to="{ name: 'home' }">Home</b-link>
+          </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav>
           <b-nav-item>
             <form class="input-group w-auto my-auto d-flex" @submit.prevent="searchShows()">
               <input
                 autocomplete="off"
-                type="search"
+                type="text"
                 class="form-control rounded"
                 placeholder="Search"
                 v-model="searchQuery"
+                @input="typeSearchKey()"
               />
               <span class="searchBtn input-group-text border-0 d-flex" @click="searchShows()">
                 <font-awesome-icon icon="fas fa-search" />
@@ -36,8 +40,14 @@ export default Vue.extend({
       searchQuery: "" as string,
     };
   },
+  computed: {
+    getCurrentRoute() {
+      return this.$route.name;
+    }
+  },
   methods: {
     searchShows() {
+
       if (this.searchQuery.trim() === "") {
         this.showToast();
         return;
@@ -49,9 +59,19 @@ export default Vue.extend({
           q: this.searchQuery,
         },
       });
+
+    },
+    typeSearchKey(){
+      console.log("searchQuery=> ",this.searchQuery.trim(), this.searchQuery.length);
+      if (this.searchQuery.trim() === "") {
+        console.log("redirect to home");
+        this.$router.push({
+          name: "home",
+        });
+      }
     },
     showToast() {
-      let instance = Vue.$toast.open({
+      Vue.$toast.open({
         message: "Please type something to search!",
         type: "info",
         position: "top-right",
