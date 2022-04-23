@@ -21,6 +21,8 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Show from '@/types/Show'
+import ShowSearchResult from '@/types/ShowSearchResult'
 import Loader from "@/components/Loader.vue";
 import SearchShowThumb from "@/components/SearchShowThum.vue";
 
@@ -31,9 +33,9 @@ export default Vue.extend({
   name: "SearchResult",
   data() {
     return {
-      searchResults: [] as any[],
+      searchResults: [] as Show[],
       isLoading: true as boolean,
-      searchKey: "" as any,
+      searchKey: "" as string | any,
     };
   },
   components: {
@@ -43,10 +45,10 @@ export default Vue.extend({
   methods: {
     async search(query?: string | any) {
       const searchResults = await API.getSearchResult(query);
-      let newResults = [] as any[];
+      let newResults = [] as Show[];
       //console.log("searchResults ", searchResults)
 
-      searchResults.forEach((result: any) => {
+      searchResults.forEach((result: ShowSearchResult) => {
         if (result.show.image) {
           newResults.push(result.show);
         }

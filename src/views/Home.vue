@@ -9,6 +9,7 @@
 <script lang="ts">
 import Vue from "vue";
 // @ is an alias to /src
+import Show from '@/types/Show'
 import APIService from "@/services/APIService";
 import HomeShowThumb from "@/components/HomeShowThumb.vue";
 const API = APIService.getInstance();
@@ -18,26 +19,27 @@ export default Vue.extend({
   components: { HomeShowThumb },
   data() {
     return {
-      filteredHorrorShows: [] as any,
-      filteredThrillerShows: [] as any,
-      filteredActionShows: [] as any,
+      filteredHorrorShows: [] as Show[],
+      filteredThrillerShows: [] as Show[],
+      filteredActionShows: [] as Show[],
     };
   },
   async mounted() {
     let shows = await API.getShows();
     shows = shows.slice(0, 40);
 
-    this.filteredHorrorShows = shows.filter((show: any) => {
+    this.filteredHorrorShows = shows.filter((show: Show) => {
       return show.genres.includes("Horror") && show.rating.average >= 6.5 && show.rating.average <= 9.5;
     });
 
-    this.filteredThrillerShows = shows.filter((show: any) => {
+    this.filteredThrillerShows = shows.filter((show: Show) => {
       return show.genres.includes("Thriller") && show.rating.average >= 6.5 && show.rating.average <= 9.5;
     });
 
-    this.filteredActionShows = shows.filter((show: any) => {
+    this.filteredActionShows = shows.filter((show: Show) => {
       return show.genres.includes("Action") && show.rating.average >= 6.5 && show.rating.average <= 9.5;
     });
+    //console.log(this.filteredActionShows);
   },
 });
 </script>
