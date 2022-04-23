@@ -1,5 +1,19 @@
+
+
 # tv-show-review
 Browse TV shows
+
+# Language and framework
+- Vue.js
+- TypeScript
+
+# Library and plugins
+- axios
+- vue-router
+- bootstrap-vue
+- jest
+- vue-toast-notification
+- fortawesome
 
 ## Project setup
 ```
