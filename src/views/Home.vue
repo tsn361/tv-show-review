@@ -1,20 +1,20 @@
 <template>
   <div class="home mt-4">
-    <home-movie-thumb :movies="filteredActionShows" genre="Action"></home-movie-thumb>
-    <home-movie-thumb :movies="filteredThrillerShows" genre="Thriller" class="mt-4"></home-movie-thumb>
-    <home-movie-thumb :movies="filteredHorrorShows" genre="Horror" class="mt-4"></home-movie-thumb>
+    <HomeShowThumb :movies="filteredActionShows" genre="Action"></HomeShowThumb>
+    <HomeShowThumb :movies="filteredThrillerShows" genre="Thriller" class="mt-4"></HomeShowThumb>
+    <HomeShowThumb :movies="filteredHorrorShows" genre="Horror" class="mt-4"></HomeShowThumb>
   </div>
 </template>
 
 <script lang="ts">
 // @ is an alias to /src
 import APIService from "@/services/APIService";
-import HomeMovieThumb from '@/components/homeMovieThumb.vue';
+import HomeShowThumb from '@/components/HomeShowThumb.vue';
 const API = APIService.getInstance();
 
 export default {
   name: "HomeView",
-  components: {HomeMovieThumb},
+  components: {HomeShowThumb},
   data() {
     return {
       filteredHorrorShows: [] as any,

@@ -9,22 +9,7 @@
           <h3 class="text-white">Search Results for "{{searchKey}}"</h3>
         </div>
         <b-col cols="6" lg="3" class="mt-4" v-for="val in searchResults" :key="val.id">
-          <b-link :to="{ name: 'show', params: { id: val.id } }">
-            <div class="card">
-              <img :src="val.image.medium" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">{{ truncate(val.name, 45) }}</h5>
-                <div class="d-flex flex-sm-row flex-column align-items-baseline align-content-stretch flex-wrap">
-                  <small class="card-text mb-0 w-75 premiered"
-                    >Premiered: {{ val.premiered ? val.premiered : "not mensioned" }}</small
-                  >
-                  <p class="card-text w-25 rating">
-                    <i class="fas fa-link"></i> &#11088;{{ val.rating.average ? val.rating.average : 0.0 }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </b-link>
+          <SearchShowThumb :show="val"></SearchShowThumb>
         </b-col>
       </div>
       <div v-else class="text-center mt-5">
@@ -36,6 +21,8 @@
 
 <script lang="ts">
 import Loader from "@/components/Loader.vue";
+import SearchShowThumb from "@/components/SearchShowThum.vue";
+
 import APIService from "@/services/APIService";
 const API = APIService.getInstance();
 
@@ -50,11 +37,10 @@ export default {
   },
   components: {
     Loader,
+    SearchShowThumb
   },
   methods: {
-    truncate(str: string, n: number) {
-      return str.length > n ? str.substr(0, n - 1) + "..." : str;
-    },
+
     async search(query?: string | any) {
       const searchResults = await API.getSearchResult(query);
       let newResults = [] as any[];
